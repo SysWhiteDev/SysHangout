@@ -14,3 +14,7 @@ export const signInSchema = z.object({
 })
 
 export type SignInValues = z.infer<typeof signInSchema>;
+
+export const createPostSchema = z.object({
+    content: z.string().trim().min(1, "Required"),
+});
