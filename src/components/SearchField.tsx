@@ -17,12 +17,12 @@ export default function SearchField() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="relative">
+    <form onSubmit={handleSubmit} method="GET" action={"/search"}>
+      <div className="group relative">
         <Input
           name="q"
           placeholder="Find anything..."
-          className="bg-neutral-100 pe-10"
+          className="truncate bg-neutral-100 pe-10 transition-all focus:w-[500px] group-hover:w-[500px] dark:bg-neutral-900"
         ></Input>
         <button
           type="submit"

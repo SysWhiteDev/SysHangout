@@ -12,9 +12,9 @@ export default async function Layout({
   if (!session.user) redirect("/login");
   return (
     <SessionProvider value={session}>
-      <div className="flex min-h-screen flex-col bg-neutral-200">
+      <div className="flex min-h-screen flex-col bg-card">
         <Navbar />
-        <div className="mx-auto max-w-7xl p-5 "> {children}</div>
+        <div className="mx-auto max-w-7xl p-5"> {children}</div>
       </div>
     </SessionProvider>
   );

@@ -1,6 +1,7 @@
 "use server"
 
 import { lucia, validateRequest } from "@/auth"
+import prisma from "@/lib/prisma";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -15,4 +16,8 @@ export async function signOut() {
     cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
 
     return redirect("/login")
+}
+
+export async function getTotalUserCount() {
+    return await prisma.user.count();;
 }
