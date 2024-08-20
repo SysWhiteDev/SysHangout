@@ -44,7 +44,7 @@ export default function PostEditor() {
               {user.displayName}
             </span>
           </Link>
-          <span className="text-sm font-normal opacity-50">Now</span>
+          <span className="text-sm font-normal opacity-50">Just now</span>
         </div>
       </div>
       <div>
