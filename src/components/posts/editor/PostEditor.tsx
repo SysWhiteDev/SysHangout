@@ -7,6 +7,7 @@ import UserAvatar from "@/components/UserAvatar";
 import { useSession } from "@/app/(main)/SessionProvider";
 import { Button } from "@/components/ui/button";
 import "./style.css";
+import Link from "next/link";
 
 export default function PostEditor() {
   const { user } = useSession();
@@ -34,10 +35,16 @@ export default function PostEditor() {
   return (
     <div className="flex flex-col gap-4 rounded-2xl bg-neutral-200 p-5 shadow-sm dark:bg-neutral-900">
       <div className="flex gap-2.5">
-        <UserAvatar avatarUrl={user.avatarUrl} className="hidden sm:inline" />
+        <Link href={`/user/${user.username}`}>
+          <UserAvatar avatarUrl={user.avatarUrl} />
+        </Link>
         <div className="flex flex-col">
-          <span className="font-semibold">{user.displayName} </span>
-          <span className="font-normal opacity-50">27 July 2023</span>
+          <Link href={`/user/${user.username}`}>
+            <span className="font-semibold hover:underline">
+              {user.displayName}
+            </span>
+          </Link>
+          <span className="text-sm font-normal opacity-50">Now</span>
         </div>
       </div>
       <div>

@@ -1,5 +1,6 @@
 import PostEditor from "@/components/posts/editor/PostEditor";
 import Post from "@/components/posts/Post";
+import TrendingSidebar from "@/components/TrendingSidebar";
 import prisma from "@/lib/prisma";
 import { postDataInclude } from "@/lib/types";
 
