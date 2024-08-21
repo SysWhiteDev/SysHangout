@@ -8,20 +8,13 @@ export function getUserDataSelect(loggedInUserId: string) {
         avatarUrl: true,
         id: true,
         bio: true,
+        createdAt: true,
         followers: {
             where: {
                 followerId: loggedInUserId
             },
             select: {
                 followerId: true
-            }
-        },
-        following: {
-            where: {
-                followingId: loggedInUserId
-            },
-            select: {
-                followingId: true
             }
         },
         _count: {

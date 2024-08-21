@@ -13,6 +13,7 @@ export default function FollowersCounter({
   initialState,
 }: CountersProps) {
   const { data } = useFollowerInfo(userId, initialState);
+  
 
   return (
     <>

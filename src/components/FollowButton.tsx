@@ -34,6 +34,7 @@ export default function FollowButton({
       queryClient.setQueryData<FollowerInfo>(queryKey, () => ({
         followers:
           (previousState?.followers || 0) + (data.isFollowedByUser ? -1 : 1),
+
         isFollowedByUser: !previousState?.isFollowedByUser,
       }));
 

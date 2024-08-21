@@ -21,6 +21,7 @@ export default function SearchField() {
       <div className="group relative">
         <Input
           name="q"
+          autoComplete="off"
           placeholder="Find anything..."
           className="truncate bg-neutral-100 pe-10 transition-all focus:w-[500px] group-hover:w-[500px] dark:bg-neutral-900"
         ></Input>
