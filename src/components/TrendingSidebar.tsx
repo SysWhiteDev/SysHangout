@@ -11,7 +11,7 @@ import { formatNumber } from "@/lib/utils";
 
 export default function TrendingSidebar() {
   return (
-    <div className="sticky top-[98px] hidden h-fit flex-none space-y-5 sm:block">
+    <div className="sticky top-[98px] hidden h-fit flex-none space-y-5 md:block">
       <Suspense fallback={<Loader2 className="!my-0 mx-auto animate-spin" />}>
         <TrendingUsers />
         <TrendingTopics />
@@ -38,6 +38,16 @@ async function TrendingUsers() {
     <div className="rounded-2xl bg-neutral-200 px-4 py-4 shadow-sm dark:bg-neutral-900 lg:px-4 xl:w-80">
       <div className="mb-4 text-xl font-semibold">Who to follow</div>
       <div className="space-y-3">
+        {usersToFollow.length === 0 && (
+          <div className="flex flex-col items-center py-6 justify-center rounded-2xl bg-neutral-100 p-5 shadow-sm dark:bg-black dark:border-neutral-900 border-2">
+            <p className="mx-auto text-center font-semibold">
+              No suggested users
+            </p>
+            <p className="mx-auto text-center text-sm dark:opacity-70 dark:opacity-50">
+              Check again in a few hours...
+            </p>
+          </div>
+        )}
         {usersToFollow.map((user) => (
           <div
             key={user.id}
@@ -52,7 +62,7 @@ async function TrendingUsers() {
                 <p className="truncate font-semibold group-hover:underline">
                   {user.displayName}
                 </p>
-                <p className="truncate text-sm font-normal opacity-50">
+                <p className="truncate text-sm font-normal opacity-70 dark:opacity-50">
                   @{user.username}
                 </p>
               </div>
@@ -92,6 +102,16 @@ async function TrendingTopics() {
     <div className="rounded-2xl bg-neutral-200 px-4 py-4 shadow-sm dark:bg-neutral-900 lg:px-4 xl:w-80">
       <div className="mb-4 text-xl font-semibold">Trending topics</div>
       <div className="space-y-4">
+        {trendingTopics.length === 0 && (
+          <div className="flex flex-col items-center py-6 justify-center rounded-2xl bg-neutral-100 p-5 shadow-sm dark:bg-black dark:border-neutral-900 border-2">
+            <p className="mx-auto text-center font-semibold">
+              No trending hashtags
+            </p>
+            <p className="mx-auto text-center text-sm opacity-70 dark:opacity-50">
+              Start a trend, use a hashtag!
+            </p>
+          </div>
+        )}
         {trendingTopics.map(({ hashtag, count }) => {
           const title = hashtag.split("#")[1];
           return (
@@ -102,7 +122,7 @@ async function TrendingTopics() {
               >
                 {hashtag}
               </p>
-              <p className="truncate text-sm opacity-50">
+              <p className="truncate text-sm opacity-70 dark:opacity-50">
                 {formatNumber(count)} {count === 1 ? "post" : "posts"}
               </p>
             </Link>

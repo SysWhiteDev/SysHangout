@@ -26,10 +26,8 @@ export default function Post({ post }: PostProps) {
         </div>
       </div>
       <Link href={`/post/${post.id}`}>
-        <div>
-          <p className="max-h-[20rem] w-full whitespace-pre-line overflow-y-auto pt-2 text-xl">
-            {post.content}
-          </p>
+        <div className="whitespace-pre-wrap break-words pt-2 text-xl">
+          {post.content}
         </div>
       </Link>
     </div>

@@ -2,10 +2,8 @@
 import { EditorContent, useEditor } from "@tiptap/react";
 import { StarterKit } from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
-import { submitPost } from "./actions";
 import UserAvatar from "@/components/UserAvatar";
 import { useSession } from "@/app/(main)/SessionProvider";
-import { Button } from "@/components/ui/button";
 import "./style.css";
 import Link from "next/link";
 import { useSubmitPostMutation } from "./mutations";
@@ -27,6 +25,7 @@ export default function PostEditor() {
     ],
     immediatelyRender: false,
   });
+  const editorLength = editor?.state.doc.textContent.length || 0;
 
   const input = editor?.getText({ blockSeparator: "\n" }) || "";
 
@@ -58,10 +57,15 @@ export default function PostEditor() {
           editor={editor}
           className="max-h-[20rem] w-full overflow-y-auto rounded-xl bg-neutral-300 px-4 py-2 text-xl dark:bg-neutral-800"
         />
-        <div className="mt-2.5 flex justify-end">
+        <div className="mt-2.5 flex items-center justify-end gap-4">
+          <span
+            className={`${editorLength < 120 ? "opacity-0" : "opacity-50"} ${editorLength > 256 ? "text-red-700 dark:text-red-400 font-semibold" : "text-black dark:text-white"} text-sm transition-all`}
+          >
+            {editorLength}/256
+          </span>
           <LoadingButton
             loading={mutation.isPending}
-            disabled={!input.trim()}
+            disabled={!input.trim() || editorLength > 256}
             onClick={onSubmit}
             className="min-w-20"
           >

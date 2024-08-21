@@ -40,11 +40,10 @@ export function useSubmitPostMutation() {
                 }
             });
 
-            toast({ description: "Posted created" });
+            toast({ description: "Post created" });
         },
         onError: (error) => {
-            console.log(error)
-            toast({ variant: "destructive", description: "An error occurred while posting..." });
+            toast({ variant: "destructive", description: `An unknown error occurred while posting` });
         },
     })
     return mutation;

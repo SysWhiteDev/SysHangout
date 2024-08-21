@@ -47,8 +47,8 @@ export default function ForYouFeed() {
   if (status === "success" && !posts.length && !hasNextPage) {
     return (
       <div className="flex flex-col items-center py-12 justify-center rounded-2xl bg-neutral-100 p-5 shadow-sm dark:bg-black dark:border-neutral-900 border-2">
-        <p className="font-semibold text-xl">Uh oh! It seems nobody has posted yet...</p>
-        <p className="opacity-50">Create the first post yourself!</p>
+        <p className="font-semibold text-xl text-center">Uh oh! It seems nobody has posted yet...</p>
+        <p className="opacity-70 dark:opacity-50 text-center">Create the first post yourself!</p>
       </div>
     );
   }

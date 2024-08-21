@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="grid h-dvh grid-cols-1 xl:grid-cols-2">
-      <div className="relative hidden xl:block overflow-hidden border-r-2 border-neutral-400 bg-neutral-800 p-8 text-white dark:border-neutral-800">
+      <div className="relative hidden overflow-hidden border-r-2 border-neutral-400 bg-neutral-800 p-8 text-white dark:border-neutral-800 xl:block">
         <div className="absolute bottom-0 left-0 right-0 top-0 h-full overflow-hidden blur-[250px]">
           <div className="h-[300px] w-[200px] bg-primary" />
           <div className="absolute -right-[50px] bottom-0 h-full w-[200px] bg-primary" />
@@ -28,7 +28,7 @@ export default function Page() {
         </div>
       </div>
       <div className="flex flex-col items-center justify-center bg-slate-100 shadow dark:bg-card">
-        <div className="md:min-w-[400px] text-center px-2">
+        <div className="px-2 text-center md:min-w-[400px]">
           <p className="text-2xl font-semibold">Welcome back to SysHangout</p>
           <p className="pt-1 text-sm opacity-75">
             What do you think youll find today?

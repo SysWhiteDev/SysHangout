@@ -19,5 +19,5 @@ export async function signOut() {
 }
 
 export async function getTotalUserCount() {
-    return await prisma.user.count();;
+    return await prisma.user.count();
 }

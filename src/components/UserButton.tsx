@@ -36,7 +36,22 @@ export default function UserButton({ className }: UserButtonProps) {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>Logged in as @{user.username}</DropdownMenuLabel>
+        <DropdownMenuLabel className="overflow-hidden rounded-t-xl p-0">
+          <div className="flex h-24 w-52 items-end bg-gradient-to-b from-primary p-2">
+            <UserAvatar
+              avatarUrl={user.avatarUrl}
+              size={40}
+              className="mr-1.5 shadow-md"
+            />
+            <div>
+              <p className="font-semibold">{user.displayName}</p>
+              <p className="text-sm font-normal opacity-70 dark:opacity-50">
+                {" "}
+                @{user.username}
+              </p>
+            </div>
+          </div>
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <Link href={`/users/${user.username}`}>
           <DropdownMenuItem className="cursor-pointer">
@@ -75,7 +90,7 @@ export default function UserButton({ className }: UserButtonProps) {
             queryClient.clear();
             signOut();
           }}
-          className="cursor-pointer text-destructive"
+          className="cursor-pointer text-destructive text-red-700 dark:text-red-400"
         >
           <LogOutIcon className="mr-2 size-4" />
           Log out
