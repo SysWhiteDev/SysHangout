@@ -1,6 +1,7 @@
 "use client";
 
 import InfiniteScrollContainer from "@/components/InfiniteScrollContainer";
+import DeletePostDialog from "@/components/posts/DeletePostDialog";
 import Post from "@/components/posts/Post";
 import PostsLoadingSkeleton from "@/components/posts/PostsLoadingSkeleton";
 import { Button } from "@/components/ui/button";
@@ -46,9 +47,13 @@ export default function ForYouFeed() {
 
   if (status === "success" && !posts.length && !hasNextPage) {
     return (
-      <div className="flex flex-col items-center py-12 justify-center rounded-2xl bg-neutral-100 p-5 shadow-sm dark:bg-black dark:border-neutral-900 border-2">
-        <p className="font-semibold text-xl text-center">Uh oh! It seems nobody has posted yet...</p>
-        <p className="opacity-70 dark:opacity-50 text-center">Create the first post yourself!</p>
+      <div className="flex flex-col items-center justify-center rounded-2xl border-2 bg-neutral-100 p-5 py-12 shadow-sm dark:border-neutral-900 dark:bg-black">
+        <p className="text-center text-xl font-semibold">
+          Uh oh! It seems nobody has posted yet...
+        </p>
+        <p className="text-center opacity-70 dark:opacity-50">
+          Create the first post yourself!
+        </p>
       </div>
     );
   }
