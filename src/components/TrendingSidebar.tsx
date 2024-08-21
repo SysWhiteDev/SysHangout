@@ -1,6 +1,6 @@
 import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
-import { userDataSelect } from "@/lib/types";
+import { getUserDataSelect } from "@/lib/types";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -8,10 +8,11 @@ import UserAvatar from "./UserAvatar";
 import { Button } from "./ui/button";
 import { unstable_cache } from "next/cache";
 import { formatNumber } from "@/lib/utils";
+import FollowButton from "./FollowButton";
 
 export default function TrendingSidebar() {
   return (
-    <div className="sticky top-[98px] hidden h-fit flex-none space-y-5 md:block">
+    <div className="sticky top-[98px] hidden h-fit w-60 flex-none space-y-5 md:block xl:w-80">
       <Suspense fallback={<Loader2 className="!my-0 mx-auto animate-spin" />}>
         <TrendingUsers />
         <TrendingTopics />
@@ -29,8 +30,13 @@ async function TrendingUsers() {
       NOT: {
         id: user.id,
       },
+      followers: {
+        none: {
+          followerId: user.id,
+        },
+      },
     },
-    select: userDataSelect,
+    select: getUserDataSelect(user.id),
     take: 5,
   });
 
@@ -39,11 +45,11 @@ async function TrendingUsers() {
       <div className="mb-4 text-xl font-semibold">Who to follow</div>
       <div className="space-y-3">
         {usersToFollow.length === 0 && (
-          <div className="flex flex-col items-center py-6 justify-center rounded-2xl bg-neutral-100 p-5 shadow-sm dark:bg-black dark:border-neutral-900 border-2">
+          <div className="flex flex-col items-center justify-center rounded-2xl border-2 bg-neutral-100 p-5 py-6 shadow-sm dark:border-neutral-900 dark:bg-black">
             <p className="mx-auto text-center font-semibold">
               No suggested users
             </p>
-            <p className="mx-auto text-center text-sm dark:opacity-70 dark:opacity-50">
+            <p className="mx-auto text-center text-sm opacity-70 dark:opacity-50">
               Check again in a few hours...
             </p>
           </div>
@@ -67,7 +73,15 @@ async function TrendingUsers() {
                 </p>
               </div>
             </Link>
-            <Button className="min-w-20">Follow</Button>
+            <FollowButton
+              userId={user.id}
+              initialState={{
+                followers: user._count.followers,
+                isFollowedByUser: user.followers.some(
+                  (follower) => follower.followerId === user.id,
+                ),
+              }}
+            />
           </div>
         ))}
       </div>
@@ -103,7 +117,7 @@ async function TrendingTopics() {
       <div className="mb-4 text-xl font-semibold">Trending topics</div>
       <div className="space-y-4">
         {trendingTopics.length === 0 && (
-          <div className="flex flex-col items-center py-6 justify-center rounded-2xl bg-neutral-100 p-5 shadow-sm dark:bg-black dark:border-neutral-900 border-2">
+          <div className="flex flex-col items-center justify-center rounded-2xl border-2 bg-neutral-100 p-5 py-6 shadow-sm dark:border-neutral-900 dark:bg-black">
             <p className="mx-auto text-center font-semibold">
               No trending hashtags
             </p>
