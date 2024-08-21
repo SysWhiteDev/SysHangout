@@ -1,16 +1,14 @@
 "use client";
 
 import InfiniteScrollContainer from "@/components/InfiniteScrollContainer";
-import DeletePostDialog from "@/components/posts/DeletePostDialog";
 import Post from "@/components/posts/Post";
 import PostsLoadingSkeleton from "@/components/posts/PostsLoadingSkeleton";
-import { Button } from "@/components/ui/button";
 import kyInstance from "@/lib/ky";
-import { PostData, PostsPage } from "@/lib/types";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { PostsPage } from "@/lib/types";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 
-export default function ForYouFeed() {
+export default function FollowingFeed() {
   const {
     data,
     fetchNextPage,
@@ -19,11 +17,11 @@ export default function ForYouFeed() {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["post-feed", "for-you"],
+    queryKey: ["post-feed", "following"],
     queryFn: ({ pageParam }) =>
       kyInstance
         .get(
-          "/api/posts/for-you",
+          "/api/posts/following",
           pageParam ? { searchParams: { cursor: pageParam } } : {},
         )
         .json<PostsPage>(),
@@ -49,10 +47,10 @@ export default function ForYouFeed() {
     return (
       <div className="flex flex-col items-center justify-center rounded-2xl border-2 bg-neutral-100 p-5 py-12 shadow-sm dark:border-neutral-900 dark:bg-black">
         <p className="text-center text-xl font-semibold">
-          Uh oh! It seems nobody has posted yet...
+          There are no posts to show
         </p>
         <p className="text-center opacity-70 dark:opacity-50">
-          Create the first post yourself!
+          Maybe try following somebody?
         </p>
       </div>
     );
@@ -61,7 +59,7 @@ export default function ForYouFeed() {
   return (
     <InfiniteScrollContainer
       onBottomReached={() => hasNextPage && !isFetching && fetchNextPage()}
-      className="space-y-5 !mt-2.5"
+      className="!mt-2.5 space-y-5"
     >
       {posts.map((post) => (
         <Post key={post.id} post={post} />

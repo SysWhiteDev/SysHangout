@@ -37,7 +37,7 @@ export default function UserButton({ className }: UserButtonProps) {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel className="overflow-hidden rounded-t-xl p-0">
-          <div className="flex h-24 w-52 items-end bg-gradient-to-b from-primary p-2">
+          <div className="flex items-end p-2">
             <UserAvatar
               avatarUrl={user.avatarUrl}
               size={40}

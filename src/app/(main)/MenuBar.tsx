@@ -1,16 +1,19 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Bell, Bookmark, Home } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface MenuBarProps {
   className?: string;
 }
 
 export default function MenuBar({ className }: MenuBarProps) {
+  const pathname = usePathname();
   return (
     <div className={className}>
       <Button
-        variant={"ghost"}
+        variant={pathname === "/" ? "secondary" : "ghost"}
         className="flex items-center justify-start gap-3"
         title="Home"
         asChild
@@ -21,7 +24,7 @@ export default function MenuBar({ className }: MenuBarProps) {
         </Link>
       </Button>
       <Button
-        variant={"ghost"}
+        variant={pathname === "/notifications" ? "secondary" : "ghost"}
         className="flex items-center justify-start gap-3"
         title="Notifcations"
         asChild
@@ -32,7 +35,7 @@ export default function MenuBar({ className }: MenuBarProps) {
         </Link>
       </Button>
       <Button
-        variant={"ghost"}
+        variant={pathname === "/bookmarks" ? "secondary" : "ghost"}
         className="flex items-center justify-start gap-3"
         title="Bookmarks"
         asChild

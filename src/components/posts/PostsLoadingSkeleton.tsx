@@ -2,7 +2,7 @@ import { Skeleton } from "../ui/skeleton";
 
 export default function PostsLoadingSkeleton() {
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 !mt-2.5">
       <PostLoadingSkeleton />
       <PostLoadingSkeleton />
       <PostLoadingSkeleton />
