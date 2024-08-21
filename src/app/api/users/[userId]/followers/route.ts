@@ -21,7 +21,8 @@ export async function GET(req: NextRequest, { params: { userId } }: { params: { 
                 },
                 _count: {
                     select: {
-                        followers: true
+                        followers: true,
+                        following: true,
                     }
                 }
             },
