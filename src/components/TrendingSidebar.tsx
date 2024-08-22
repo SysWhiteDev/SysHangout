@@ -41,11 +41,11 @@ async function TrendingUsers() {
   });
 
   return (
-    <div className="rounded-2xl bg-neutral-200 px-4 py-4 shadow-sm dark:bg-neutral-900 lg:px-4 xl:w-80">
+    <div className="rounded-xl bg-neutral-200 px-4 py-4 shadow-sm dark:bg-neutral-900 lg:px-4 xl:w-80">
       <div className="mb-4 text-xl font-semibold">Who to follow</div>
       <div className="space-y-3">
         {usersToFollow.length === 0 && (
-          <div className="flex flex-col items-center justify-center rounded-2xl border-2 bg-neutral-100 p-5 py-6 shadow-sm dark:border-neutral-900 dark:bg-black">
+          <div className="flex flex-col items-center justify-center rounded-xl border-2 bg-neutral-100 p-5 py-6 shadow-sm dark:border-neutral-900 dark:bg-black">
             <p className="mx-auto text-center font-semibold">
               No suggested users
             </p>
@@ -61,9 +61,12 @@ async function TrendingUsers() {
           >
             <Link
               href={`/user/${user.username}`}
-              className="group flex w-full items-center gap-2.5"
+              className="group flex flex-none items-center gap-2.5"
             >
-              <UserAvatar avatarUrl={user.avatarUrl} className="flex-none" />
+              <UserAvatar
+                avatarUrl={user.avatarUrl}
+                className="hidden flex-none xl:block"
+              />
               <div>
                 <p className="truncate font-semibold group-hover:underline">
                   {user.displayName}
@@ -113,11 +116,11 @@ async function TrendingTopics() {
   const trendingTopics = await getTrendingTopics();
 
   return (
-    <div className="rounded-2xl bg-neutral-200 px-4 py-4 shadow-sm dark:bg-neutral-900 lg:px-4 xl:w-80">
+    <div className="rounded-xl bg-neutral-200 px-4 py-4 shadow-sm dark:bg-neutral-900 lg:px-4 xl:w-80">
       <div className="mb-4 text-xl font-semibold">Trending topics</div>
       <div className="space-y-4">
         {trendingTopics.length === 0 && (
-          <div className="flex flex-col items-center justify-center rounded-2xl border-2 bg-neutral-100 p-5 py-6 shadow-sm dark:border-neutral-900 dark:bg-black">
+          <div className="flex flex-col items-center justify-center rounded-xl border-2 bg-neutral-100 p-5 py-6 shadow-sm dark:border-neutral-900 dark:bg-black">
             <p className="mx-auto text-center font-semibold">
               No trending hashtags
             </p>

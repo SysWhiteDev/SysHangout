@@ -38,7 +38,7 @@ export default function PostEditor() {
   }
 
   return (
-    <div className="flex flex-col gap-4 rounded-2xl bg-neutral-200 p-5 shadow-sm dark:bg-neutral-900">
+    <div className="flex flex-col gap-4 rounded-xl bg-neutral-200 p-5 shadow-sm dark:bg-neutral-900">
       <div className="flex gap-2.5">
         <Link href={`/user/${user.username}`}>
           <UserAvatar avatarUrl={user.avatarUrl} />

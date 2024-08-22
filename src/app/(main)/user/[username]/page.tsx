@@ -10,6 +10,8 @@ import FollowersCounter from "@/components/FollowersCounter";
 import { formatNumber } from "@/lib/utils";
 import { Calendar } from "lucide-react";
 import { formatDate } from "date-fns";
+import FollowButton from "@/components/FollowButton";
+import UserPosts from "./UserPosts";
 
 interface PageProps {
   params: {
@@ -62,8 +64,8 @@ export default async function Page({ params: { username } }: PageProps) {
   const user = await getUser(username, loggedInUser.id);
 
   return (
-    <div className="flex w-full min-w-0 gap-5">
-      <div className="w-full space-y-1.5 rounded-2xl bg-neutral-200 p-5 shadow-sm dark:bg-neutral-900">
+    <div className="flex w-full min-w-0 flex-col gap-5">
+      <div className="w-full space-y-1.5 rounded-xl bg-neutral-200 p-5 shadow-sm dark:bg-neutral-900">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-2.5">
             <UserAvatar
@@ -76,6 +78,17 @@ export default async function Page({ params: { username } }: PageProps) {
               <p className="opacity-75 dark:opacity-50">@{user.username}</p>
             </div>
           </div>
+          {user.id !== loggedInUser.id && (
+            <FollowButton
+              userId={user.id}
+              initialState={{
+                followers: user._count.followers,
+                isFollowedByUser: user.followers.some(
+                  (follower) => follower.followerId === user.id,
+                ),
+              }}
+            />
+          )}
         </div>
 
         <div className="pt-3">
@@ -87,7 +100,7 @@ export default async function Page({ params: { username } }: PageProps) {
         <div className="space-x-2.5 pt-4">
           <FollowersCounter
             userId={user.id}
-            initialState={{ followers: 0, isFollowedByUser: false, }}
+            initialState={{ followers: 0, isFollowedByUser: false }}
           />
           <span>
             Following:
@@ -103,6 +116,12 @@ export default async function Page({ params: { username } }: PageProps) {
             Joined on {formatDate(new Date(user.createdAt), "MMMM dd, yyyy")}
           </p>
         </div>
+      </div>
+      <div className="w-full space-y-3">
+        <div className="text-xl w-full rounded-xl bg-neutral-300 py-4 text-center font-semibold dark:bg-neutral-900">
+          This user&apos;s posts
+        </div>
+        <UserPosts userId={user.id} />
       </div>
     </div>
   );

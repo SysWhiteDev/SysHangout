@@ -14,7 +14,7 @@ export default function Post({ post }: PostProps) {
   const { user } = useSession();
 
   return (
-    <div className="flex flex-col gap-2.5 rounded-2xl bg-neutral-200 p-5 shadow-sm dark:bg-neutral-900">
+    <div className="flex flex-col gap-2.5 rounded-xl bg-neutral-200 p-5 shadow-sm dark:bg-neutral-900">
       <div className="flex items-start justify-between gap-3">
         <div className="flex gap-2.5">
           <Link href={`/user/${post.user.username}`}>

@@ -19,7 +19,7 @@ export default async function Layout({
         <Navbar />
         <div className="mx-auto flex w-full max-w-7xl grow gap-5 p-5">
           <div className="sticky top-[98px] hidden h-fit space-y-5 md:block">
-            <MenuBar className="flex-none space-y-1.5 rounded-2xl bg-neutral-200 p-2.5 shadow-sm dark:bg-neutral-900 lg:px-2.5 xl:w-60" />{" "}
+            <MenuBar className="flex-none space-y-1.5 rounded-xl bg-neutral-200 p-2.5 shadow-sm dark:bg-neutral-900 lg:px-2.5 xl:w-60" />{" "}
             <MenubarUserCount />
           </div>{" "}
           <div className="w-full">{children}</div>

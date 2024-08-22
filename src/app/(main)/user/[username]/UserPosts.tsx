@@ -8,7 +8,11 @@ import { PostsPage } from "@/lib/types";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 
-export default function FollowingFeed() {
+interface UserPostsProps {
+  userId: string;
+}
+
+export default function UserPosts({ userId }: UserPostsProps) {
   const {
     data,
     fetchNextPage,
@@ -17,11 +21,11 @@ export default function FollowingFeed() {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["post-feed", "following"],
+    queryKey: ["post-feed", { userId }],
     queryFn: ({ pageParam }) =>
       kyInstance
         .get(
-          "/api/posts/following",
+          `/api/users/${userId}/posts`,
           pageParam ? { searchParams: { cursor: pageParam } } : {},
         )
         .json<PostsPage>(),
@@ -47,10 +51,7 @@ export default function FollowingFeed() {
     return (
       <div className="flex flex-col items-center justify-center rounded-xl border-2 bg-neutral-100 p-5 py-12 shadow-sm dark:border-neutral-900 dark:bg-black">
         <p className="text-center text-xl font-semibold">
-          There are no posts to show
-        </p>
-        <p className="text-center opacity-70 dark:opacity-50">
-          Maybe try following somebody?
+          The user hasn&apos;t posted yet
         </p>
       </div>
     );
@@ -59,7 +60,7 @@ export default function FollowingFeed() {
   return (
     <InfiniteScrollContainer
       onBottomReached={() => hasNextPage && !isFetching && fetchNextPage()}
-      className="!mt-2.5 space-y-5"
+      className="space-y-5"
     >
       {posts.map((post) => (
         <Post key={post.id} post={post} />

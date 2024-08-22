@@ -13,13 +13,12 @@ export default function FollowersCounter({
   initialState,
 }: CountersProps) {
   const { data } = useFollowerInfo(userId, initialState);
-  
 
   return (
     <>
       <span>
         Followers:
-        <span className="font-bold"> {formatNumber(data.followers)}</span>
+        <span className="font-bold"> {formatNumber(data?.followers || 0)}</span>
       </span>
     </>
   );

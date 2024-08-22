@@ -23,7 +23,7 @@ export default function FollowButton({
 
   const { mutate } = useMutation({
     mutationFn: () =>
-      data.isFollowedByUser
+      data?.isFollowedByUser
         ? kyInstance.delete(`/api/users/${userId}/followers`)
         : kyInstance.post(`/api/users/${userId}/followers`),
     onMutate: async () => {
@@ -33,7 +33,7 @@ export default function FollowButton({
 
       queryClient.setQueryData<FollowerInfo>(queryKey, () => ({
         followers:
-          (previousState?.followers || 0) + (data.isFollowedByUser ? -1 : 1),
+          (previousState?.followers || 0) + (data?.isFollowedByUser ? -1 : 1),
 
         isFollowedByUser: !previousState?.isFollowedByUser,
       }));
@@ -50,10 +50,10 @@ export default function FollowButton({
   return (
     <Button
       className="min-w-20"
-      variant={data.isFollowedByUser ? "secondary" : "default"}
+      variant={data?.isFollowedByUser ? "secondary" : "default"}
       onClick={() => mutate()}
     >
-      {data.isFollowedByUser ? "Unfollow" : "Follow"}
+      {data?.isFollowedByUser ? "Unfollow" : "Follow"}
     </Button>
   );
 }

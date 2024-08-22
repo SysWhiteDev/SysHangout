@@ -47,7 +47,7 @@ export default function ForYouFeed() {
 
   if (status === "success" && !posts.length && !hasNextPage) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-2xl border-2 bg-neutral-100 p-5 py-12 shadow-sm dark:border-neutral-900 dark:bg-black">
+      <div className="flex flex-col items-center justify-center rounded-xl border-2 bg-neutral-100 p-5 py-12 shadow-sm dark:border-neutral-900 dark:bg-black">
         <p className="text-center text-xl font-semibold">
           Uh oh! It seems nobody has posted yet...
         </p>
@@ -61,7 +61,7 @@ export default function ForYouFeed() {
   return (
     <InfiniteScrollContainer
       onBottomReached={() => hasNextPage && !isFetching && fetchNextPage()}
-      className="space-y-5 !mt-2.5"
+      className="!mt-2.5 space-y-5"
     >
       {posts.map((post) => (
         <Post key={post.id} post={post} />

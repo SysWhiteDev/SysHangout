@@ -48,6 +48,7 @@ export async function POST(req: NextRequest, { params: { userId } }: { params: {
     try {
         const { user: loggedInUser } = await validateRequest();
         if (!loggedInUser) return Response.json({ error: "Unauthorized" }, { status: 401 });
+        if (loggedInUser.id === userId) return Response.json({ error: "You can't follow yourself" }, { status: 400 });
 
         await prisma.follow.upsert({
             where: {
@@ -74,6 +75,7 @@ export async function DELETE(req: NextRequest, { params: { userId } }: { params:
     try {
         const { user: loggedInUser } = await validateRequest();
         if (!loggedInUser) return Response.json({ error: "Unauthorized" }, { status: 401 });
+        if (loggedInUser.id === userId) return Response.json({ error: "You can't unfollow yourself" }, { status: 400 });
 
         await prisma.follow.deleteMany({
             where: {
