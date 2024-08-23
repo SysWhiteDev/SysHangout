@@ -2,7 +2,7 @@ import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
 import { NextRequest } from "next/server";
 
-export async function GET(req: NextRequest, { postId }: { postId: string }) {
+export async function GET(req: NextRequest) {
     try {
 
         const cursor = req.nextUrl.searchParams.get("cursor") || undefined;
@@ -34,11 +34,12 @@ export async function GET(req: NextRequest, { postId }: { postId: string }) {
 }
 
 
-export async function POST(req: Request, { postId }: { postId: string }) {
+export async function POST(req: Request, { params: { postId } }: { params: { postId: string } }) {
     try {
         const { user: loggedInUser } = await validateRequest();
         if (!loggedInUser) return Response.json({ error: "Unauthorized" }, { status: 401 });
 
+        console.log(postId)
 
         await prisma.bookmark.upsert({
             where: {
@@ -62,11 +63,10 @@ export async function POST(req: Request, { postId }: { postId: string }) {
     }
 }
 
-export async function DELETE(req: Request, { postId }: { postId: string }) {
+export async function DELETE(req: Request, { params: { postId } }: { params: { postId: string } }) {
     try {
         const { user: loggedInUser } = await validateRequest();
         if (!loggedInUser) return Response.json({ error: "Unauthorized" }, { status: 401 });
-
 
         await prisma.bookmark.deleteMany({
             where: {

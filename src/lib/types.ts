@@ -31,7 +31,15 @@ export function getPostDataInclude(loggedInUserId: string) {
         user: {
             select: getUserDataSelect(loggedInUserId),
         },
-    } satisfies Prisma.PostInclude
+        bookmarks: {
+            select: {
+                id: true,
+                postId: true,
+                userId: true,
+                createdAt: true,
+            }
+        }
+    } as Prisma.PostInclude
 }
 
 export type PostData = Prisma.PostGetPayload<{

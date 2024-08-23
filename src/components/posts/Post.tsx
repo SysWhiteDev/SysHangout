@@ -41,7 +41,7 @@ export default function Post({ post }: PostProps) {
         </div>
       </Link>
       <div className="mt-2.5 border-t pt-2.5">
-        <PostActionButtons postId={post.id} />
+        <PostActionButtons post={post} />
       </div>
     </div>
   );
