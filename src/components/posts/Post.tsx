@@ -40,7 +40,7 @@ export default function Post({ post }: PostProps) {
           {post.content}
         </div>
       </Link>
-      <div className="mt-2.5 border-t pt-2.5">
+      <div className="border-t pt-2.5">
         <PostActionButtons post={post} />
       </div>
     </div>
