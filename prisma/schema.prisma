@@ -16,20 +16,32 @@ datasource db {
 }
 
 model User {
-  id           String    @id
-  username     String    @unique
+  id           String     @id
+  username     String     @unique
   displayName  String
-  email        String    @unique
+  email        String     @unique
   passwordHash String
   avatarUrl    String?
   bio          String?
   sessions     Session[]
-  createdAt    DateTime  @default(now())
+  createdAt    DateTime   @default(now())
   posts        Post[]
-  following    Follow[]  @relation("Following")
-  followers    Follow[]  @relation("Followers")
+  following    Follow[]   @relation("Following")
+  followers    Follow[]   @relation("Followers")
+  bookmarks    Bookmark[]
 
   @@map("users")
+}
+
+model Bookmark {
+  id        String   @id @default(cuid())
+  postId    String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([postId, userId])
+  @@map("bookmarks")
 }
 
 model Session {

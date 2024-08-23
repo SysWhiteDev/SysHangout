@@ -5,6 +5,8 @@ import Link from "next/link";
 import { formatRelativeDate } from "@/lib/utils";
 import { useSession } from "@/app/(main)/SessionProvider";
 import PostMoreButton from "./PostMoreButton";
+import PostActionButtons from "./PostActionButtons";
+import { SeparatorHorizontal } from "lucide-react";
 
 interface PostProps {
   post: PostData;
@@ -38,6 +40,9 @@ export default function Post({ post }: PostProps) {
           {post.content}
         </div>
       </Link>
+      <div className="mt-2.5 border-t pt-2.5">
+        <PostActionButtons postId={post.id} />
+      </div>
     </div>
   );
 }

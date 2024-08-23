@@ -21,8 +21,8 @@ export default async function Layout({
           <div className="sticky top-[98px] hidden h-fit space-y-5 md:block">
             <MenuBar className="flex-none space-y-1.5 rounded-xl bg-neutral-200 p-2.5 shadow-sm dark:bg-neutral-900 lg:px-2.5 xl:w-60" />{" "}
             <MenubarUserCount />
-          </div>{" "}
-          <div className="w-full">{children}</div>
+          </div>
+          {children}
           <TrendingSidebar />
         </div>
         <MenuBar className="sticky bottom-0 flex w-full justify-around gap-5 border-t bg-neutral-200 p-3 dark:bg-neutral-900 md:hidden" />
