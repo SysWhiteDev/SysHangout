@@ -46,6 +46,12 @@ export type PostData = Prisma.PostGetPayload<{
     include: ReturnType<typeof getPostDataInclude>;
 }>;
 
+export type UserData = {
+    id: string;
+    username: string;
+    displayName: string;
+    avatarUrl: string | null;
+}
 
 export interface PostsPage {
     posts: PostData[];

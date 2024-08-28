@@ -51,7 +51,7 @@ export default function Page() {
       <div className="w-full">
         <div className="flex flex-col items-center justify-center rounded-xl border-2 bg-neutral-100 p-5 py-12 shadow-sm dark:border-neutral-900 dark:bg-black">
           <p className="text-center text-xl font-semibold">
-            Uh oh! It seems you haven&apos;t bookmarked any posts yet...
+            It seems you haven&apos;t bookmarked any posts yet...
           </p>
           <p className="text-center opacity-70 dark:opacity-50">
             TIP: you can bookmark posts by clicking the bookmark icon on the

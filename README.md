@@ -15,15 +15,27 @@ SysHangout is a simple social network application written in NextJS, it has all 
 - [Prisma](https://www.prisma.io/)
 - [Serverless functions](https://vercel.com/docs/serverless-functions/introduction)
 
+## Screenshots
+![screenshot of the website](image.png)
+
 ## Deploy it yourself
 
 ### Via vercel
 
-Use the button below to deploy it to vercel
+1. Use the button below to deploy it to vercel
 
 ...coming soon...
 
-### With docker
+2. Insert the required environment variables, below an exaple:
+
+```env
+POSTGRES_PRISMA_URL="postgres://username:password@hostname/dbname?sslmode=require&pgbouncer=true&connect_timeout=15"
+
+POSTGRES_URL_NON_POOLING="postgres://username:password@hostname/dbname?sslmode=require"
+```
+TIP: You can create a free PostgreSQL database directly on vercel in the database tab
+
+### With docker (ONLY FOR DEVELOPMENT)
 
 1. Clone the repository
 
