@@ -24,17 +24,22 @@ export default function PostMoreButton({
     <>
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <Button size={"icon"} variant={"ghost"} className={className}>
+          <div
+            className={
+              "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+            }
+          >
             <MoreHorizontal className="size-5 text-muted-foreground" />
-          </Button>
+          </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem
+            className="cursor-pointer"
             onClick={() => setShowDeleteDialog(true)}
           >
-            <span className="flex cursor-pointer items-center gap-3 text-red-700 dark:text-red-400">
-                <Trash2 className="size-4" />
-                Delete
+            <span className="flex items-center gap-3 text-red-700 dark:text-red-400">
+              <Trash2 className="size-4" />
+              Delete
             </span>
           </DropdownMenuItem>
         </DropdownMenuContent>
