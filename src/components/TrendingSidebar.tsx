@@ -54,7 +54,7 @@ async function TrendingUsers() {
             </p>
           </div>
         )}
-        {usersToFollow.map((user) => (
+        {usersToFollow.map((user: any) => (
           <div
             key={user.id}
             className="flex items-center justify-between gap-4"
@@ -81,7 +81,7 @@ async function TrendingUsers() {
               initialState={{
                 followers: user._count.followers,
                 isFollowedByUser: user.followers.some(
-                  (follower) => follower.followerId === user.id,
+                  (follower: any) => follower.followerId === user.id,
                 ),
               }}
             />
@@ -101,7 +101,7 @@ const getTrendingTopics = unstable_cache(
     ORDER by count DESC, hashtag ASC
     LIMIT 5
   `;
-    return result.map((row) => ({
+    return result.map((row: any) => ({
       hashtag: row.hashtag,
       count: Number(row.count),
     }));
@@ -129,7 +129,7 @@ async function TrendingTopics() {
             </p>
           </div>
         )}
-        {trendingTopics.map(({ hashtag, count }) => {
+        {trendingTopics.map(({ hashtag, count }: any) => {
           const title = hashtag.split("#")[1];
           return (
             <Link key={title} href={`/hashtag/${title}`} className="block">

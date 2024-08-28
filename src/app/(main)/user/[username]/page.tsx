@@ -84,7 +84,7 @@ export default async function Page({ params: { username } }: PageProps) {
               initialState={{
                 followers: user._count.followers,
                 isFollowedByUser: user.followers.some(
-                  (follower) => follower.followerId === user.id,
+                  (follower: any) => follower.followerId === user.id,
                 ),
               }}
             />

@@ -1,0 +1,27 @@
+services:
+  syshangout:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      POSTGRES_PRISMA_URL: postgres://syshangout:CHANGEME@postgres:5432/syshangoutdb?sslmode=require&pgbouncer=true&connect_timeout=15
+      POSTGRES_URL_NON_POOLING: postgres://syshangout:CHANGEME@postgres:5432/syshangoutdb?sslmode=require
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: syshangoutdb
+      POSTGRES_USER: syshangout
+      POSTGRES_PASSWORD: CHANGEME
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+
+volumes:
+  postgres_data:

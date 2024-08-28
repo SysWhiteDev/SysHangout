@@ -18,7 +18,7 @@ export default function Bookmark({ post }: { post: PostData }) {
   const { user } = useSession();
   const { toast } = useToast();
   let isBookmarked = post.bookmarks.some(
-    (bookmark) => bookmark.userId === user.id,
+    (bookmark: any) => bookmark.userId === user.id,
   );
 
   const queryClient = useQueryClient();

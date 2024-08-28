@@ -69,7 +69,7 @@ export default async function SearchPage({
             Posts
           </div>
           <div className="space-y-5">
-            {resultsPosts.map((post) => (
+            {resultsPosts.map((post: any) => (
               <Post key={post.id} post={post} />
             ))}
           </div>
