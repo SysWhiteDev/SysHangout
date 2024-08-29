@@ -29,6 +29,7 @@ model User {
   following    Follow[]   @relation("Following")
   followers    Follow[]   @relation("Followers")
   bookmarks    Bookmark[]
+  permissions  Int        @default(0)
 
   @@map("users")
 }

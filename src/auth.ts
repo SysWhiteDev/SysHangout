@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma"
 import { Lucia, Session, User } from "lucia";
 import { cache } from "react";
 import { cookies } from "next/headers";
+import { permission } from "process";
 const adapter = new PrismaAdapter(prisma.session, prisma.user);
 
 export const lucia = new Lucia(adapter, {
@@ -18,6 +19,7 @@ export const lucia = new Lucia(adapter, {
             username: databaseUserAttributes.username,
             displayName: databaseUserAttributes.displayName,
             avatarUrl: databaseUserAttributes.avatarUrl,
+            permissions: databaseUserAttributes.permissions,
         }
     }
 })
@@ -29,6 +31,7 @@ interface DatabaseUserAttributes {
     username: string;
     displayName: string;
     avatarUrl: string | null;
+    permissions: Number;
 }
 
 declare module "lucia" {
