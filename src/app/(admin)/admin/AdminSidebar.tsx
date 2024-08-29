@@ -13,57 +13,15 @@ export default function AdminSidebar({
           <ChartPie size={18} />
           <p>Overview</p>
         </SidebarLink>
-        <SidebarLink destination="/admins">
+        <SidebarLink destination="/admin/pending">
           <ShieldQuestion size={18} />
           <p>Pending verifications</p>
         </SidebarLink>
       </div>
-      <div className="mr-4 h-[98%] w-0.5 rounded-full bg-neutral-300 py-4 dark:bg-neutral-800"></div>
+      <div className="h-[98%] w-0.5 rounded-full bg-neutral-300 py-4 dark:bg-neutral-800"></div>
       <div className="h-full w-full overflow-y-auto">
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
-        <p>dhkasjkdha</p>
+        {children}
       </div>
-    </div>
+    </div>  
   );
 }
