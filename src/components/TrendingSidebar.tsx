@@ -9,6 +9,7 @@ import { Button } from "./ui/button";
 import { unstable_cache } from "next/cache";
 import { formatNumber } from "@/lib/utils";
 import FollowButton from "./FollowButton";
+import Badges from "./Badges";
 
 export default function TrendingSidebar() {
   return (
@@ -68,15 +69,16 @@ async function TrendingUsers() {
                 className="hidden flex-none xl:block"
               />
               <div>
-                <p className="truncate font-semibold group-hover:underline">
-                  {user.displayName}
-                </p>
+                <span className="flex items-center gap-1 truncate font-semibold group-hover:underline">
+                  <p className="truncate">{user.displayName}</p>{" "}
+                  <Badges user={user} />
+                </span>
                 <p className="truncate text-sm font-normal opacity-70 dark:opacity-50">
                   @{user.username}
                 </p>
               </div>
             </Link>
-            <FollowButton
+            {/* <FollowButton
               userId={user.id}
               initialState={{
                 followers: user._count.followers,
@@ -84,7 +86,7 @@ async function TrendingUsers() {
                   (follower: any) => follower.followerId === user.id,
                 ),
               }}
-            />
+            /> */}
           </div>
         ))}
       </div>

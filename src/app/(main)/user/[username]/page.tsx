@@ -12,6 +12,8 @@ import { Calendar } from "lucide-react";
 import { formatDate } from "date-fns";
 import FollowButton from "@/components/FollowButton";
 import UserPosts from "./UserPosts";
+import Badges from "@/components/Badges";
+import { User } from "@prisma/client";
 
 interface PageProps {
   params: {
@@ -74,7 +76,10 @@ export default async function Page({ params: { username } }: PageProps) {
               className="mx-auto"
             />
             <div className="">
-              <p className="text-2xl font-semibold">{user.displayName}</p>
+              <span className="flex items-center gap-1 text-2xl font-semibold">
+                {user.displayName}
+                <Badges user={user as any} />
+              </span>
               <p className="opacity-75 dark:opacity-50">@{user.username}</p>
             </div>
           </div>
@@ -118,7 +123,7 @@ export default async function Page({ params: { username } }: PageProps) {
         </div>
       </div>
       <div className="w-full space-y-3">
-        <div className="text-xl w-full rounded-xl bg-neutral-300 py-4 text-center font-semibold dark:bg-neutral-900">
+        <div className="w-full rounded-xl bg-neutral-300 py-4 text-center text-xl font-semibold dark:bg-neutral-900">
           This user&apos;s posts
         </div>
         <UserPosts userId={user.id} />

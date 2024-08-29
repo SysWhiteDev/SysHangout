@@ -15,10 +15,21 @@ import {
 } from "./ui/dropdown-menu";
 import UserAvatar from "./UserAvatar";
 import Link from "next/link";
-import { Check, LogOutIcon, Monitor, Moon, Sun, UserIcon } from "lucide-react";
+import {
+  Check,
+  LogOutIcon,
+  Monitor,
+  Moon,
+  Shield,
+  Sun,
+  UserIcon,
+} from "lucide-react";
 import { signOut } from "@/app/(auth)/actions";
 import { useTheme } from "next-themes";
 import { useQueryClient } from "@tanstack/react-query";
+import Badges from "./Badges";
+import { User } from "@prisma/client";
+import { PERMISSIONS } from "@/lib/permissions";
 
 interface UserButtonProps {
   className?: string;
@@ -44,7 +55,10 @@ export default function UserButton({ className }: UserButtonProps) {
               className="mr-1.5 shadow-md"
             />
             <div>
-              <p className="font-semibold">{user.displayName}</p>
+              <span className="flex items-center gap-1 font-semibold">
+                {user.displayName}
+                <Badges user={user as User} />
+              </span>
               <p className="text-sm font-normal opacity-70 dark:opacity-50">
                 {" "}
                 @{user.username}
@@ -52,6 +66,19 @@ export default function UserButton({ className }: UserButtonProps) {
             </div>
           </div>
         </DropdownMenuLabel>
+
+        {((user.permissions as any) & PERMISSIONS.ADMIN) ===
+          PERMISSIONS.ADMIN && (
+          <>
+            <DropdownMenuSeparator />
+            <Link href={`/admin`}>
+              <DropdownMenuItem className="cursor-pointer">
+                <Shield className="mr-2 size-4" />
+                Admin Panel
+              </DropdownMenuItem>
+            </Link>
+          </>
+        )}
         <DropdownMenuSeparator />
         <Link href={`/user/${user.username}`}>
           <DropdownMenuItem className="cursor-pointer">

@@ -8,6 +8,8 @@ import "./style.css";
 import Link from "next/link";
 import { useSubmitPostMutation } from "./mutations";
 import LoadingButton from "@/components/LoadingButton";
+import Badges from "@/components/Badges";
+import { User } from "@prisma/client";
 
 export default function PostEditor() {
   const { user } = useSession();
@@ -45,8 +47,8 @@ export default function PostEditor() {
         </Link>
         <div className="flex flex-col">
           <Link href={`/user/${user.username}`}>
-            <span className="font-semibold hover:underline">
-              {user.displayName}
+            <span className="font-semibold hover:underline flex items-center gap-1">
+              {user.displayName} <Badges user={user as User} />
             </span>
           </Link>
           <span className="text-sm font-normal opacity-50">Just now</span>

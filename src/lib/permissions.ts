@@ -3,7 +3,8 @@ import prisma from "./prisma";
 
 export const PERMISSIONS = {
     VERIFIED: 1 << 0,
-    ADMIN: 1 << 1,
+    VERIFIED_BADGE: 1 << 1,
+    ADMIN: 1 << 2,
 }
 
 export async function addPermissionToUser(user: User, permission: number) {

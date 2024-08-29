@@ -12,7 +12,6 @@ export async function GET(req: NextRequest) {
 
         const { user } = await validateRequest();
         if (!user) return Response.json({ error: "Unauthorized" }, { status: 401 });
-        console.log(await hasPermission(user, PERMISSIONS.VERIFIED));
 
         const posts = await prisma.post.findMany({
             include: getPostDataInclude(user.id),

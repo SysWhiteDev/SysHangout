@@ -7,6 +7,7 @@ import { useSession } from "@/app/(main)/SessionProvider";
 import PostMoreButton from "./PostMoreButton";
 import PostActionButtons from "./PostActionButtons";
 import { SeparatorHorizontal } from "lucide-react";
+import Badges from "../Badges";
 
 interface PostProps {
   post: PostData;
@@ -24,8 +25,8 @@ export default function Post({ post }: PostProps) {
           </Link>
           <div className="flex flex-col">
             <Link href={`/user/${post.user.username}`}>
-              <span className="font-semibold hover:underline">
-                {post.user.displayName}
+              <span className="flex items-center gap-1 font-semibold hover:underline">
+                {post.user.displayName} <Badges user={post.user} />
               </span>
             </Link>
             <span className="text-sm font-normal opacity-50">

@@ -22,7 +22,8 @@ export function getUserDataSelect(loggedInUserId: string) {
                 followers: true,
                 following: true,
             }
-        }
+        },
+        permissions: true,
     } satisfies Prisma.UserSelect
 }
 
