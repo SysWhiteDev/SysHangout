@@ -1,4 +1,5 @@
 import { validateRequest } from "@/auth";
+import { hasPermission, PERMISSIONS } from "@/lib/permissions";
 import prisma from "@/lib/prisma";
 import { getPostDataInclude, getUserDataSelect, PostsPage } from "@/lib/types";
 import { NextRequest } from "next/server";
@@ -6,7 +7,7 @@ import { NextRequest } from "next/server";
 export async function GET(req: NextRequest, { params: { userId } }: { params: { userId: string } }) {
     try {
         const { user: loggedInUser } = await validateRequest();
-        if (!loggedInUser) return Response.json({ error: "Unauthorized" }, { status: 401 });
+        if (!loggedInUser || !(await hasPermission(loggedInUser, PERMISSIONS.VERIFIED))) return Response.json({ error: "Unauthorized" }, { status: 401 });
 
         const cursor = req.nextUrl.searchParams.get("cursor") || undefined;
         const pageSize = 5;

@@ -1,6 +1,7 @@
 "use server"
 
 import { validateRequest } from "@/auth"
+import { hasPermission, PERMISSIONS } from "@/lib/permissions";
 import prisma from "@/lib/prisma";
 import { getPostDataInclude } from "@/lib/types";
 import { createPostSchema } from "@/lib/validation";
@@ -8,7 +9,7 @@ import { createPostSchema } from "@/lib/validation";
 export async function submitPost(input: string) {
     const { user } = await validateRequest();
 
-    if (!user) {
+    if (!user || !(await hasPermission(user, PERMISSIONS.VERIFIED))) {
         throw new Error("Unauthorized");
     }
 

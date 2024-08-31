@@ -1,4 +1,5 @@
 import { validateRequest } from "@/auth";
+import { hasPermission, PERMISSIONS } from "@/lib/permissions";
 import prisma from "@/lib/prisma";
 import { FollowerInfo } from "@/lib/types";
 import { NextRequest } from "next/server";
@@ -7,7 +8,7 @@ export async function GET(req: NextRequest, { params: { userId } }: { params: { 
     try {
         const { user: loggedInUser } = await validateRequest();
 
-        if (!loggedInUser) return Response.json({ error: "Unauthorized" }, { status: 401 });
+        if (!loggedInUser || !(await hasPermission(loggedInUser, PERMISSIONS.VERIFIED))) return Response.json({ error: "Unauthorized" }, { status: 401 });
 
         const user = await prisma.user.findUnique({
             where: { id: userId },

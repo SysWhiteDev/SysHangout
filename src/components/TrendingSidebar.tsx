@@ -10,6 +10,7 @@ import { unstable_cache } from "next/cache";
 import { formatNumber } from "@/lib/utils";
 import FollowButton from "./FollowButton";
 import Badges from "./Badges";
+import { hasPermission, PERMISSIONS } from "@/lib/permissions";
 
 export default function TrendingSidebar() {
   return (
@@ -24,7 +25,7 @@ export default function TrendingSidebar() {
 
 async function TrendingUsers() {
   const { user } = await validateRequest();
-  if (!user) return null;
+  if (!user || !(await hasPermission(user, PERMISSIONS.VERIFIED))) return null;
 
   const usersToFollow = await prisma.user.findMany({
     where: {
@@ -115,6 +116,9 @@ const getTrendingTopics = unstable_cache(
 );
 
 async function TrendingTopics() {
+  const { user } = await validateRequest();
+  if (!user || !(await hasPermission(user, PERMISSIONS.VERIFIED))) return null;
+
   const trendingTopics = await getTrendingTopics();
 
   return (

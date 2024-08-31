@@ -14,6 +14,7 @@ export default async function Layout({
   if (!session.user) redirect("/login");
   if ((await hasPermission(session.user, PERMISSIONS.ADMIN)) === false)
     redirect("/");
+
   return (
     <SessionProvider value={session}>
       <div className="flex min-h-screen w-full flex-col bg-card">

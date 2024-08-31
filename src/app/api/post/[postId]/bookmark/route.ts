@@ -1,4 +1,5 @@
 import { validateRequest } from "@/auth";
+import { hasPermission, PERMISSIONS } from "@/lib/permissions";
 import prisma from "@/lib/prisma";
 import { NextRequest } from "next/server";
 
@@ -9,7 +10,7 @@ export async function GET(req: NextRequest) {
         const pageSize = 5;
 
         const { user: loggedInUser } = await validateRequest();
-        if (!loggedInUser) return Response.json({ error: "Unauthorized" }, { status: 401 });
+        if (!loggedInUser || !(await hasPermission(loggedInUser, PERMISSIONS.VERIFIED))) return Response.json({ error: "Unauthorized" }, { status: 401 });
 
 
         const bookmarks = await prisma.bookmark.findMany({

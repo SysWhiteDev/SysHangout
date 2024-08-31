@@ -14,6 +14,7 @@ import FollowButton from "@/components/FollowButton";
 import UserPosts from "./UserPosts";
 import Badges from "@/components/Badges";
 import { User } from "@prisma/client";
+import { hasPermission, PERMISSIONS } from "@/lib/permissions";
 
 interface PageProps {
   params: {
@@ -56,7 +57,7 @@ export async function generateMetadata({
 export default async function Page({ params: { username } }: PageProps) {
   const { user: loggedInUser } = await validateRequest();
 
-  if (!loggedInUser)
+  if (!loggedInUser || !(await hasPermission(loggedInUser, PERMISSIONS.VERIFIED)))
     return (
       <p className="mx-auto text-center text-destructive">
         You are not authorized to view this page.

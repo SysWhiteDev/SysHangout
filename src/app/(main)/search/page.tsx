@@ -2,6 +2,7 @@ import { validateRequest } from "@/auth";
 import InfiniteScrollContainer from "@/components/InfiniteScrollContainer";
 import Post from "@/components/posts/Post";
 import UserCard from "@/components/posts/UserCard";
+import { hasPermission, PERMISSIONS } from "@/lib/permissions";
 import prisma from "@/lib/prisma";
 import { getPostDataInclude, PostData, UserData } from "@/lib/types";
 import { get } from "http";
@@ -13,7 +14,7 @@ export default async function SearchPage({
   searchParams: any;
 }) {
   const { user } = await validateRequest();
-  if (!user) return null;
+  if (!user || !(await hasPermission(user, PERMISSIONS.VERIFIED))) return null;
 
   if (!searchParams.q) {
     redirect("/");
